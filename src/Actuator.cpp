@@ -50,3 +50,42 @@ void Actuator::tepkiVer(float rollAci , float pitchAci) {
     analogWrite(pinBurun, burunPwm);
     analogWrite(pinKuyruk, kuyrukPwm);
 }
+
+void Actuator::showTime() {
+    // 1. ADIM: Kırmızı (Sol) ve Yeşil (Sağ) Kanat LED'leri 2 kez yanıp sönsün
+    for (int i = 0; i < 2; i++) {
+        analogWrite(pinSolKanat, 255);
+        analogWrite(pinSagKanat, 255);
+        delay(500); // Yarım saniye yan
+        
+        analogWrite(pinSolKanat, 0);
+        analogWrite(pinSagKanat, 0);
+        delay(500); // Yarım saniye sön
+    }
+
+    // 2. ADIM: Sarı LED'ler (Burun ve Kuyruk) 2 kez yanıp sönsün
+    for (int i = 0; i < 2; i++) {
+        analogWrite(pinBurun, 255);
+        analogWrite(pinKuyruk, 255);
+        delay(500); 
+        
+        analogWrite(pinBurun, 0);
+        analogWrite(pinKuyruk, 0);
+        delay(500); 
+    }
+
+    // 3. ADIM: Tüm LED'ler birlikte 2 kez yanıp sönsün
+    for (int i = 0; i < 2; i++) {
+        analogWrite(pinSolKanat, 255);
+        analogWrite(pinSagKanat, 255);
+        analogWrite(pinBurun, 255);
+        analogWrite(pinKuyruk, 255);
+        delay(500); 
+        
+        analogWrite(pinSolKanat, 0);
+        analogWrite(pinSagKanat, 0);
+        analogWrite(pinBurun, 0);
+        analogWrite(pinKuyruk, 0);
+        delay(500); 
+    }
+}

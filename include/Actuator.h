@@ -16,6 +16,8 @@ class Actuator {
 
         void baslat();
 
+        void showTime();
+
         void tepkiVer(float rollAci, float pitchAci);
 };
 

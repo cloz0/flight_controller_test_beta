@@ -1,41 +1,47 @@
 #include <Arduino.h>
 #include "Sensor.h"
+#include "Actuator.h"
 
 Sensor ucakSensorleri;
+Actuator ucakKaslari;
 
+// Zamanlama için değişkenler
 unsigned long oncekiZaman = 0;
-const int gonguGecikmesi = 100;
+const int donguGecikmesi = 100;
 
 void setup() {
-
     Serial.begin(115200);
+    Serial.println("--- ESP32 Ucus Kontrolcusu Baslatiliyor ---");
 
-    Serial.println("Baslatiliyor...");
-
+    // Sensörleri ve LED pinlerini fiziksel olarak uyandır
     ucakSensorleri.baslat();
+    ucakKaslari.baslat(); // LED pinlerini OUTPUT yaptık ve sönük başlattık
 
-    Serial.println("Sistem baslatildi.");
-    delay(2000);
+    ucakKaslari.showTime(); // LED'leri yanıp söndürerek sistemin hazır olduğunu göster
+    
+    Serial.println("Sistem hazir!...");
+    delay(100); 
 }
 
 void loop() {
+    unsigned long suankiZaman = millis();
 
-    unsigned long simdikiZaman = millis();
-
-    if (simdikiZaman - oncekiZaman >= gonguGecikmesi) {
-        oncekiZaman = simdikiZaman;
+    if (suankiZaman - oncekiZaman >= donguGecikmesi) {
+        oncekiZaman = suankiZaman;
 
         ucakSensorleri.guncelle();
 
-        float rollAci = ucakSensorleri.getRollAci();
-        float pitchAci = ucakSensorleri.getPitchAci();
-        float irtifa = ucakSensorleri.getIrtifa();
+        float anlikRoll = ucakSensorleri.getRollAci();
+        float anlikPitch = ucakSensorleri.getPitchAci();
 
-        Serial.print("Roll Aci: ");
-        Serial.print(rollAci);
-        Serial.print(" | Pitch Aci: ");
-        Serial.print(pitchAci);
+        // Değerleri bilgisayar ekranında da görmek için yazdırıyoruz
+        Serial.print("Roll: ");
+        Serial.print(anlikRoll);
+        Serial.print(" | Pitch: ");
+        Serial.println(anlikPitch);
         Serial.print(" | Irtifa: ");
-        Serial.println(irtifa);
+        Serial.println(ucakSensorleri.getIrtifa());
+
+        ucakKaslari.tepkiVer(anlikRoll, anlikPitch);
     }
 }
