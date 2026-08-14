@@ -7,6 +7,7 @@ Bu proje, ESP32 mikrodenetleyicisi kullanılarak sıfırdan geliştirilmiş, Nes
 ## Proje Mimarisi ve Yazılım Kuralları
 
 Bu yazılım, bir mühendislik disipliniyle ve uçuş güvenliği ön planda tutularak tasarlanmıştır:
+
 * **Modüler Yapı (OOP):** Tüm donanımlar (Sensörler ve Aktüatörler) birbirlerinden bağımsız, kapsüllenmiş (encapsulation) C++ sınıfları olarak programlanmıştır.
 * **Güvenli Bellek Yönetimi:** Havada sistem kilitlenmelerini (memory leak) önlemek amacıyla dinamik bellek tahsisi (`new`/`delete`) kesinlikle kullanılmamış, tüm nesneler statik olarak oluşturulmuştur.
 * **Asenkron Çalışma:** Sensör okumaları ve tepkiler esnasında işlemciyi donduran `delay()` fonksiyonu yerine, `millis()` tabanlı bloklamayan (non-blocking) bir zamanlama algoritması kullanılarak döngü hızı (loop time) stabilize edilmiştir.
