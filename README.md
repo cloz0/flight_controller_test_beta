@@ -2,7 +2,7 @@
 
 Bu proje, ESP32 mikrodenetleyicisi kullanılarak sıfırdan geliştirilmiş, Nesne Yönelimli Programlama (OOP) mimarisine sahip bir İHA uçuş kontrol (stabilizasyon) sistemidir.
 
-Şu anki sürüm (v1.0.0-beta), fiziksel servo motorlara geçilmeden önceki donanım simülasyonu aşamasıdır. Uçağın yatış açılarına (Roll ve Pitch) vermesi gereken dengeleyici tepkiler, PWM sinyalleri ile kontrol edilen LED'ler (sanal servolar) üzerinden test edilmektedir.
+Şu anki sürüm (v1.1.0-beta), fiziksel servo motorlara geçilmeden önceki donanım simülasyonu aşamasıdır. Uçağın yatış açılarına (Roll ve Pitch) vermesi gereken dengeleyici tepkiler, PWM sinyalleri ile kontrol edilen LED'ler (sanal servolar) üzerinden test edilmektedir.
 
 ## Proje Mimarisi ve Yazılım Kuralları
 
