@@ -36,17 +36,21 @@ void loop() {
 
         float rollTepkisi = ucakBeyni.hesaplaRollTepkisi(anlikRoll);
         float pitchTepkisi = ucakBeyni.hesaplaPitchTepkisi(anlikPitch);
+        float anlikIrtifa = ucakSensorleri.getIrtifa();
 
         ucakKaslari.tepkiVer(rollTepkisi, pitchTepkisi);
 
         Serial.print("Roll: "); 
         Serial.print(anlikRoll);
-        Serial.print(" | Roll Tepkisi (Hata): "); 
+        Serial.print(" | Roll Tepkisi: "); 
         Serial.print(rollTepkisi);
     
         Serial.print(" || Pitch: "); 
         Serial.print(anlikPitch);
-        Serial.print(" | Pitch Tepkisi (Hata): "); 
-        Serial.println(pitchTepkisi);
+        Serial.print(" | Pitch Tepkisi: "); 
+        Serial.print(pitchTepkisi);
+
+        Serial.print(" || Irtifa: ");
+        Serial.println(anlikIrtifa);
     }
 }
