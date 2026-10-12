@@ -2,10 +2,12 @@
 #include "Sensor.h"
 #include "Actuator.h"
 #include "ControlAlgorithm.h"
+#include "Telemetry.h" // 1. Telsizin kimlik kartını ekledik
 
 Sensor ucakSensorleri;
 Actuator ucakKaslari;
 ControlAlgorithm ucakBeyni;
+Telemetry ucakTelsizi; // 2. Telsiz nesnemizi oluşturduk
 
 // Zamanlama için değişkenler
 unsigned long oncekiZaman = 0;
@@ -19,6 +21,9 @@ void setup() {
     ucakKaslari.baslat(); 
     ucakKaslari.showTime(); 
     
+    // 3. Telsizi (Wi-Fi ağını) başlatıyoruz
+    ucakTelsizi.baslat();
+
     Serial.println("Sistem hazir!...");
     delay(100); 
 }
@@ -40,6 +45,10 @@ void loop() {
 
         ucakKaslari.tepkiVer(rollTepkisi, pitchTepkisi);
 
+        // 4. Telsizi Kullan (Verileri UDP ile havaya fırlat)
+        ucakTelsizi.veriGonder(anlikRoll, anlikPitch, anlikIrtifa);
+
+        // Senin orijinal ekran çıktıların (Hiç dokunulmadı)
         Serial.print("Roll: "); 
         Serial.print(anlikRoll);
         Serial.print(" | Roll Tepkisi: "); 
